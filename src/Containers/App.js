@@ -3,6 +3,7 @@ import StartUp from '../Components/StartUp';
 import Info from '../Components/Info';
 import Carousel from './carousel';
 import End from '../Components/pageEnd';
+import ContactUs from '../Components/ContactUs.js';
 
 class App extends Component {
 
@@ -13,7 +14,8 @@ class App extends Component {
           <Info />
           <Carousel/> 
           <hr className="ma0"/> 
-          <End />    
+          <ContactUs />
+          <End/>
         </div>
     );
   }

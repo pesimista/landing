@@ -5,13 +5,19 @@ import Card from '../Components/card';
 import Expected from '../Components/Expected';
 import '../css/Carousel.css';
 
+import Logo from '../Media/entorno_logo.jpg';
+
 class Carousel extends Component {
   constructor()
   {
     super();
     this.state = {
       artistas: [],
-      art: "",
+      art: {
+        id:0,
+        name: "Loading",
+        email: "/"
+      },
       currentIndex: 0
     }
   }
@@ -31,9 +37,13 @@ class Carousel extends Component {
   }
 
   render() {
-    var List = this.state.artistas.map(function(currentValue){
+    var List;
+    var artist = this.state.art;
+    if(!this.state.artistas) 
+    List = (<Card key={0} name="Not found" image={Logo} profile="/" id={0} /> );
+    else List = this.state.artistas.map(function(currentValue){
     return (
-      <Card key={currentValue.id} name={currentValue.name} image="" profile={currentValue.email} id={currentValue.id} /> );
+      <Card key={currentValue.id} name={currentValue.name} image="-" profile={currentValue.email} id={currentValue.id} /> );
     });
     return (
       <section id="Carousel" className="topRound">
@@ -41,11 +51,13 @@ class Carousel extends Component {
         <h1 className={"tc mt0 f2 f1-l fw2 white-90 mb0 lh-title"}>
         Artist
         </h1>
+        <div className="fl w-third bg-gold" style={{paddingBottom: "400px", zIndex: "1"}} />
         <div className={"cards-slider active-slide-"+this.state.currentIndex} >
           <div className="cards-slider-wrapper" style={{
             transform: 'translateX('+this.state.currentIndex*(-100/this.state.artistas.length) +'%)'
           }} >
-            {List}
+            { <Card name={artist.name} image="-" profile={artist.email} id={artist.id} /> 
+            /*List*/}
           </div>
           
         </div>
@@ -58,7 +70,8 @@ class Carousel extends Component {
   {
     fetch('https://jsonplaceholder.typicode.com/users')
     .then(reply => reply.json() )
-    .then(data  => {this.setState({artistas:data, art:data[0], currentIndex: 0});});
+    .then(data  => {this.setState({artistas:data, art:data[0], currentIndex: 0}); })
+    .catch( () => {this.setState ({artistas: "", art: "", currentIndex: 0}); console.log("HI"); } );
   }
 }
 export default Carousel;

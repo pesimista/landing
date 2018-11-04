@@ -33,9 +33,9 @@ h1
 {
     display: flex;
     position: absolute;
-    transition: transform 200ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
+    /* transition: transform 200ms cubic-bezier(0.455, 0.03, 0.515, 0.955); */
 }
-.cards-slider-wrapper .fiha
+.cards-slider-wrapper .ficha
 {
     flex: 1;
 }
